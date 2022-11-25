@@ -14,67 +14,9 @@
 <body>
     <div id="header"></div>
 
-    <div id="main">
+    <div id="title"></div>
 
-        <div id="title"></div>
-
-        <div id="conteudo" class="mt-4 mx-4 d-flex flex-column justufy-content-center">
-
-            <!-- Line 1 -->
-            <h4>Informações</h4>
-            <h5 id="avisos"></h5>
-            <div class="d-flex flex-wrap">
-
-                <!-- Name -->
-                <div class="d-flex flex-column m-2">
-                    <h5 class="m-1">Nome</h5>
-                    <input id="name" type="text" class="form-control" style="width: 250px;">
-                </div>
-
-                <!-- Idade -->
-                <div class="d-flex flex-column m-2">
-                    <h5 class="m-1">Idade</h5>
-                    <input id="age" type="number" min="0" class="form-control" style="width: 60px;">
-                </div>
-
-                <!-- Altura -->
-                <div class="d-flex flex-column m-2">
-                    <h5 class="m-1">Altura (m)</h5>
-                    <input id="height" type="number" min="0" class="form-control" style="width: 100px;">
-                </div>
-
-            </div>
-
-            <!-- Line 2 -->
-            <h4 class="mt-5">Descrição</h4>
-            <div class="d-flex flex-wrap">
-
-                <!-- Eyes -->
-                <div class="d-flex flex-column m-2">
-                    <h5 class="m-1">Olhos</h5>
-                    <input id="eye" type="text" class="form-control" style="width: 250px;">
-                </div>
-
-                <!-- Hair -->
-                <div class="d-flex flex-column m-2">
-                    <h5 class="m-1">Cabelo</h5>
-                    <input id="hair" type="text" class="form-control" style="width: 250px;">
-                </div>
-
-            </div>
-            <!-- Description -->
-            <div class="d-flex flex-column m-2">
-                <h5 class="m-1">Descrição geral</h5>
-                <textarea id="geral_desc" class="form-control" aria-label="With textarea"></textarea>
-            </div>
-        </div>
-        
-    </div>
-
-    <div class="d-flex justify-content-cente px-4">
-        <button id="save" class="my-4 mx-1 btn btn-primary" onclick="reload_ficha()">Recarregar</button>
-        <button id="save" class="my-4 mx-1 btn btn-success" onclick="save_ficha()">Salvar alterações</button>
-    </div>
+    <div id="main"></div>
 
     <div id="footer"></div>
 </body>
@@ -87,6 +29,7 @@
 
 <script>
 render_main();
+reload_ficha();
 </script>
 
 </html>

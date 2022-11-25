@@ -8,8 +8,8 @@ function header_1(x1, x2, x3, x4){
             </a>
 
             <ul class="nav nav-pills">
-                <li class="nav-item"><button onclick="render_links(list_mse)" class="nav-link text-light ${x1}">Ficha</button></li>
-                <li class="nav-item"><button onclick="manuais()" class="nav-link text-light ${x2}">Anotações</button></li>
+                <li class="nav-item"><button onclick="render_main()" class="nav-link text-light ${x1}">Ficha</button></li>
+                <li class="nav-item"><button onclick="render_anota()" class="nav-link text-light ${x2}">Anotações</button></li>
                 <li class="nav-item"><button onclick="versoes_sis(versao_mse)" href="#" class="nav-link text-light ${x3}">Itens</button></li>
                 <li class="nav-item"><button onclick="fale_conosco()" href="#" class="nav-link text-light ${x4}">Dados</button></li>
             </ul>
@@ -18,8 +18,8 @@ function header_1(x1, x2, x3, x4){
 
 }
 
-function render_main(list){
-    header_1("active", "", "", "")
+function render_main(){
+    header_1("active", "", "", "");
 
     title.innerHTML = `
         <h2 class="m-4 text-center">Ficha</h2>
@@ -27,84 +27,80 @@ function render_main(list){
         <div id="cards"></div>
     `
 
-    for(var i = 0; i < list.length; i++){
-        
-    }
+    main.innerHTML = `
+        <div id="title"></div>
+
+        <div id="conteudo" class="mt-4 mx-4 d-flex flex-column justufy-content-center">
+
+            <!-- Line 1 -->
+            <h4>Informações</h4>
+            <h5 id="avisos"></h5>
+            <div class="d-flex flex-wrap">
+
+                <!-- Name -->
+                <div class="d-flex flex-column m-2">
+                    <h5 class="m-1">Nome</h5>
+                    <input id="name" type="text" class="form-control" style="width: 250px;">
+                </div>
+
+                <!-- Idade -->
+                <div class="d-flex flex-column m-2">
+                    <h5 class="m-1">Idade</h5>
+                    <input id="age" type="number" min="0" class="form-control" style="width: 60px;">
+                </div>
+
+                <!-- Altura -->
+                <div class="d-flex flex-column m-2">
+                    <h5 class="m-1">Altura (m)</h5>
+                    <input id="height" type="number" min="0" class="form-control" style="width: 100px;">
+                </div>
+
+            </div>
+
+            <!-- Line 2 -->
+            <h4 class="mt-5">Descrição</h4>
+            <div class="d-flex flex-wrap">
+
+                <!-- Eyes -->
+                <div class="d-flex flex-column m-2">
+                    <h5 class="m-1">Olhos</h5>
+                    <input id="eye" type="text" class="form-control" style="width: 250px;">
+                </div>
+
+                <!-- Hair -->
+                <div class="d-flex flex-column m-2">
+                    <h5 class="m-1">Cabelo</h5>
+                    <input id="hair" type="text" class="form-control" style="width: 250px;">
+                </div>
+
+            </div>
+            <!-- Description -->
+            <div class="d-flex flex-column m-2">
+                <h5 class="m-1">Descrição geral</h5>
+                <textarea id="geral_desc" class="form-control" aria-label="With textarea"></textarea>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-cente px-4">
+            <button id="save" class="my-4 mx-1 btn btn-primary" onclick="reload_ficha()">Recarregar</button>
+            <button id="save" class="my-4 mx-1 btn btn-success" onclick="save_ficha()">Salvar alterações</button>
+        </div>
+    `
 
 }
 
-function fale_conosco(){
-    header_mse("", "", "", "active")
+function render_anota(){
+    header_1("", "active", "", "")
+
+    title.innerHTML = `
+        <h2 class="m-4 text-center">Anotações</h2>
+        <hr class="mx-3">
+        <div id="cards"></div>
+    `
 
     conteudo.innerHTML = `
-        <h2 class="m-4 text-center">Fale conosco</h2>
-        <hr class="mx-3">
-
-        <html><script>  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');  ga('create', 'UA-79933226-2', 'auto');  ga('send', 'pageview');</script>
-        <head>
-        <meta http-equiv="content-type" content="text/html; charset=ISO-8859-1">  <title>Chat - Grupo Oportunidade - 016 3253 8999</title>
-        </head><body>
-        <!--<div style="text-align: center;"><a href="#" target=" _blank"><img style="border: 0px solid ; width: 400px; height: 500px;" alt="Grupo Oportunidade" src="img/comunicado.jpeg"></a><br>-->
-        <br>
-        <div style="text-align: center;"><a href="http://www.grupooportunidade.com.br" target=" _blank"><img style="border: 0px solid ; width: 259px; height: 170px;" alt="Grupo Oportunidade" src="img/logo_OportunidadeFranquias-01.png"></a><br>
-        Para entrar em contato com&nbsp;o departamento desejado, clique no &iacute;cone do Chat.<br>
-        
-        Caso n&atilde;o consiga resolver seus assuntos aqui, envie-nos um
-        e-mail para:<br>
-        
-        <a href="mailto:ouvidoria@grupooportunidade.com.br"><span style="font-weight: bold; color: rgb(0, 0, 102);">ouvidoria@grupooportunidade.com.br</span></a>
-        <br>
-        
-        ou ligue <span style="font-style: italic; font-weight: bold; color: rgb(0, 0, 102);"><br>
-        
-        016
-        3253 8999<br>
-        
-        <br>
-        
-        </span><span style="font-weight: bold; color: rgb(0, 0, 102);"><span style="color: rgb(0, 0, 0);">Departamento Comercial</span></span><span style="font-style: italic; font-weight: bold; color: rgb(0, 0, 102);"><span style="color: rgb(0, 0, 0);"> </span></span><span style="font-weight: bold; color: rgb(0, 0, 102);"><span style="color: rgb(0, 0, 0);">/ Expans&atilde;o</span></span><span style="font-style: italic; font-weight: bold; color: rgb(0, 0, 102);"><br>
-        
-        <iframe style="width: 100px; height: 20px;" src="http://onbyte.mysuite1.com.br/empresas/oby/verifica_expansao_todos.php" frameborder="0" scrolling="no">
-        </iframe><br>
-        
-        </span><span style="font-weight: bold; color: rgb(0, 0, 0);"><br>
-        
-        Departamento
-        de Consultoria</span><span style="font-style: italic; font-weight: bold; color: rgb(0, 0, 102);"><br>
-        
-        <iframe style="width: 100px; height: 20px;" src="http://onbyte.mysuite1.com.br/empresas/oby/verificonsultoria.php" frameborder="0" scrolling="no">
-        </iframe><br>
-        
-        <br>
-        
-        </span><span style="font-weight: bold; color: rgb(0, 0, 0);">Departamento
-        de Suporte T&eacute;cnico e Pedag&oacute;gico<br>
-        
-        </span><span style="font-style: italic; font-weight: bold; color: rgb(0, 0, 102);"><iframe style="width: 100px; height: 20px;" src="http://onbyte.mysuite1.com.br/empresas/oby/verifica_suporte.php" frameborder="0" scrolling="no">
-        </iframe><br>
-        
-        <br>
-        
-        </span><span style="font-weight: bold; color: rgb(0, 0, 0);">Departamento
-        de Pedidos de Produtos<br>
-        
-        </span><span style="font-style: italic; color: rgb(0, 0, 0);"><iframe style="width: 100px; height: 20px;" src="http://onbyte.mysuite1.com.br/empresas/oby/verifica_pedidos.php" frameborder="0" scrolling="no"></iframe><br>
-        
-        <br>
-        
-        </span><span style="color: rgb(0, 0, 0);"><span style="font-weight: bold;">Departamento de
-        Negocia&ccedil;&otilde;es</span></span><span style="font-style: italic; color: rgb(0, 0, 0);"><br>
-        
-        (D&iacute;vidas e Boletos em Aberto)<br>
-        
-        <iframe style="width: 100px; height: 20px;" src="http://onbyte.mysuite1.com.br/empresas/oby/verifica_negociacoes.php" frameborder="0" scrolling="no">
-        </iframe><br>
-        
-        </span></div>
-        <script src="https://wbot.chat/index.js" token="eb3518dd48dcc4baca163e39f4fecd16"></script>
-        </body>
-        </html>
-    `;
+       
+    `
 }
 
 function manuais(){
