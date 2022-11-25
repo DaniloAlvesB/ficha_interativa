@@ -1,5 +1,8 @@
 body{
-    background-color: rgb(187, 187, 187);
+    background-image: url(../image/paper_bg2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 }
 
 *{
@@ -45,3 +48,4 @@ hr{
 .card_1_title{
     font-size: 120%;
 }
+
