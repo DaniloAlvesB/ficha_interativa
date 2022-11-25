@@ -1,23 +1,30 @@
 function save_ficha(){
-    var nome = document.getElementById("name").value;
-    localStorage.setItem("name", nome);
+    if(localStorage.getItem("name") == null){
+        var nome = document.getElementById("name").value;
+        localStorage.setItem("name", nome);
 
-    var idade = document.getElementById("age").value;
-    localStorage.setItem("age", idade);
+        var idade = document.getElementById("age").value;
+        localStorage.setItem("age", idade);
 
-    var altura = document.getElementById("height").value;
-    localStorage.setItem("height", altura);
+        var altura = document.getElementById("height").value;
+        localStorage.setItem("height", altura);
 
-    var olhos = document.getElementById("eye").value;
-    localStorage.setItem("eye", olhos);
+        var olhos = document.getElementById("eye").value;
+        localStorage.setItem("eye", olhos);
 
-    var cabelo = document.getElementById("hair").value;
-    localStorage.setItem("hair", cabelo);
+        var cabelo = document.getElementById("hair").value;
+        localStorage.setItem("hair", cabelo);
 
-    var desc = document.getElementById("geral_desc").value;
-    localStorage.setItem("geral_desc", desc);
+        var desc = document.getElementById("geral_desc").value;
+        localStorage.setItem("geral_desc", desc);
 
-    aviso("Informações salvas com sucesso", "text-success")
+        aviso("Informações salvas com sucesso", "text-success")
+    }else{
+        if(confirm("Já existem dados salvos, clique em OK para substituí-los.")){
+            localStorage.removeItem("name");
+            save_ficha();
+        }
+    }
 }
 
 function reload_ficha(){
