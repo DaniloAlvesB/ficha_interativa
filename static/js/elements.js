@@ -10,7 +10,7 @@ function header_1(x1, x2, x3, x4){
             <ul class="nav nav-pills">
                 <li class="nav-item"><button onclick="render_main()" class="nav-link text-light ${x1}">Ficha</button></li>
                 <li class="nav-item"><button onclick="render_anota()" class="nav-link text-light ${x2}">Anotações</button></li>
-                <li class="nav-item"><button onclick="" href="#" class="nav-link text-light ${x3}">Itens</button></li>
+                <li class="nav-item"><button onclick="render_itens()" class="nav-link text-light ${x3}">Itens</button></li>
                 <li class="nav-item"><button onclick="" href="#" class="nav-link text-light ${x4}">Dados</button></li>
             </ul>
         </header>
@@ -23,6 +23,8 @@ function render_zero(){
     main.innerHTML = ``
 }
 
+
+//Main
 function render_main(){
     render_zero();
     header_1("active", "", "", "");
@@ -96,6 +98,8 @@ function render_main(){
     reload_ficha();
 }
 
+
+//Anotações
 function render_anota(){
     render_zero();
     header_1("", "active", "", "");
@@ -131,6 +135,7 @@ function anota_ap(){
         <input id="nome_an" type="text" class="form-control" placeholder="Nome" style="width: 10%;">
         <input id="desc_an" type="text" class="form-control" placeholder="Anotação" style="width: 30%;">
         <button onclick="anota_sm()" class="btn btn-success">Concluir</button>
+        <button onclick="render_anota()" class="btn btn-danger">Cancelar</button>
     `
 }
 
@@ -167,6 +172,87 @@ function delete_note(x){
     localStorage.removeItem(x);
     render_anota()
 }
+
+
+//Itens
+function render_itens(){
+
+    render_zero();
+    header_1("","","active","");
+
+    title.innerHTML = `
+        <h2 class="m-4 text-center">Itens</h2>
+        <hr class="mx-3">
+        <div id="cards"></div>
+    `
+    main.innerHTML = `
+        <div id="nova" class="mx-4 mt-4 d-flex flex-wrap">
+        <button onclick="itens_ap()" class="btn btn-primary">Novo item</button>
+        </div>
+        <div id="lines" class="mx-4"></div>
+        <div id="info" class="mx-4"></div>
+    `
+    var count = 0;
+    for(var i = 0; i < 50; i++){
+    if(localStorage.getItem("item_" + i) != null){
+        count++
+        lines.innerHTML += `
+            ${localStorage.getItem("item_" + i)}
+        `
+    }
+    }
+    info.innerHTML = `
+        <h5>Total de ${count} itens encontrados (máximo de 100).</h5>
+    `
+
+}
+
+function itens_ap(){
+    nova.innerHTML = `
+        <input id="nome_it" type="text" class="form-control" placeholder="Nome" style="width: 10%;">
+        <input id="numb_it" type="number" class="form-control" placeholder="Peso" style="width: 10%;">
+        <textarea id="desc_it" class="form-control" placeholder="Descrição" style="width: 30%;"></textarea>
+        <button onclick="itens_sm()" class="btn btn-success">Concluir</button>
+        <button onclick="render_itens()" class="btn btn-danger">Cancelar</button>
+    `
+}
+
+function itens_sm(){
+    var name = document.getElementById("nome_it").value;
+    var desc = document.getElementById("desc_it").value;
+    var numb = document.getElementById("numb_it").value;
+
+    for(var i = 0; i < 100; i++){
+        if(localStorage.getItem("item_" + i) == null){
+            var text = `
+                <div id="anota_${i}" target="_blank">
+                    <div class="card_1_t d-flex bg-warning justify-content-between">
+                        <h3 class="card_1_title">${name}</h3>
+                        <button onclick="delete_itens('item_${i}')" type="button" class="btn btn-outline-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card_1_b">
+                        <p class="text-dark"><b>${desc}</b></p>
+                    </div>
+                </div>
+            `;
+            localStorage.setItem("item_"+i, text)
+            break;
+        }
+    }
+
+    render_itens()
+}
+
+function delete_itens(x){
+    localStorage.removeItem(x);
+    render_itens()
+}
+
+
 
 function card_1(title, description, link){
     cards.innerHTML += `
