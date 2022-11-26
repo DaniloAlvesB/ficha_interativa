@@ -11,7 +11,7 @@ function header_1(x1, x2, x3, x4){
                 <li class="nav-item"><button onclick="render_main()" class="nav-link text-light ${x1}">Ficha</button></li>
                 <li class="nav-item"><button onclick="render_anota()" class="nav-link text-light ${x2}">Anotações</button></li>
                 <li class="nav-item"><button onclick="render_itens()" class="nav-link text-light ${x3}">Itens</button></li>
-                <li class="nav-item"><button onclick="" href="#" class="nav-link text-light ${x4}">Dados</button></li>
+                <li class="nav-item"><button onclick="" class="nav-link text-secondary ${x4}">Dados</button></li>
             </ul>
         </header>
     `
