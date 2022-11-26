@@ -18,7 +18,13 @@ function header_1(x1, x2, x3, x4){
 
 }
 
+function render_zero(){
+    title.innerHTML = ``
+    main.innerHTML = ``
+}
+
 function render_main(){
+    render_zero();
     header_1("active", "", "", "");
 
     title.innerHTML = `
@@ -91,6 +97,7 @@ function render_main(){
 }
 
 function render_anota(){
+    render_zero();
     header_1("", "active", "", "");
 
     title.innerHTML = `
@@ -98,19 +105,67 @@ function render_anota(){
             <hr class="mx-3">
             <div id="cards"></div>
     `
-
     main.innerHTML = `
-        test
+        <div id="nova" class="mx-4 mt-4 d-flex flex-wrap">
+        <button onclick="anota_ap()" class="btn btn-primary">Nova anotação</button>
+        </div>
+        <div id="lines" class="mx-4"></div>
+        <div id="info" class="mx-4"></div>
     `
-    /*
-    for(var i = 0; i < 100; i++){
+    var count = 0;
+    for(var i = 0; i < 50; i++){
         if(localStorage.getItem("anota_" + i) != null){
-            main.innerHTML += `
-                Abotação ${i}
+            count++
+            lines.innerHTML += `
+                ${localStorage.getItem("anota_" + i)}
             `
         }
     }
-    */
+    info.innerHTML = `
+        <h5>Total de ${count} itens encontrados (máximo de 50).</h5>
+    `
+}
+
+function anota_ap(){
+    nova.innerHTML = `
+        <input id="nome_an" type="text" class="form-control" placeholder="Nome" style="width: 10%;">
+        <input id="desc_an" type="text" class="form-control" placeholder="Anotação" style="width: 30%;">
+        <button onclick="anota_sm()" class="btn btn-success">Concluir</button>
+    `
+}
+
+function anota_sm(){
+    var name = document.getElementById("nome_an").value;
+    var desc = document.getElementById("desc_an").value;
+
+    for(var i = 0; i < 50; i++){
+        if(localStorage.getItem("anota_" + i) == null){
+            var text = `
+                <div id="anota_${i}" target="_blank">
+                    <div class="card_1_t d-flex justify-content-between">
+                        <h3 class="card_1_title">${name}</h3>
+                        <button onclick="delete_note('anota_${i}')" type="button" class="btn btn-outline-danger">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="card_1_b">
+                        <p class="text-dark"><b>${desc}</b></p>
+                    </div>
+                </div>
+            `;
+            localStorage.setItem("anota_"+i, text)
+            break;
+        }
+    }
+
+    render_anota()
+}
+
+function delete_note(x){
+    localStorage.removeItem(x);
+    render_anota()
 }
 
 function card_1(title, description, link){
